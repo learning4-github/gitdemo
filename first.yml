@@ -1,0 +1,21 @@
+---
+  - name: this is my ist ansible playbook
+    hosts: all
+    become: yes
+    tasks:
+      - name: installing the httpd software
+        yum:
+          name: httpd
+          state: latest
+      - name: start web server
+        service:
+          name: httpd
+          state: started
+      - name: copy the index file at web server location
+        copy:
+          src: index.html
+          dest: /var/www/html/index.html
+      - name: restart the web server software
+        service:
+          name: httpd
+          state: restarted
